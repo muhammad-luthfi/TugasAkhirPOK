@@ -1,5 +1,5 @@
-.include "m8185def.inc"
-; Hanya buat ngetes, gue ganti def include nya ke m8185def.inc
+; Importing all definitions of uC 8515
+.include "m8515def.inc"
 
 .def temp =r16	; Define temporary variable
 .def EW = r17	; for PORTA
@@ -25,8 +25,8 @@ INIT:
 	OUT     SREG,R1          
 	LDI     YL,LOW(RAMEND) 
 	LDI     YH,HIGH(RAMEND)
-	OUT     SPH,R29        
-	OUT     SPL,R28
+	OUT     SPH,YH ; More convenient to call R29 as YH
+	OUT     SPL,YL
 	LDI     R17,0x00
 	LDI     XL,0x60
 	LDI     XH,0x00 
@@ -486,6 +486,15 @@ DELAY:
 	STD     Z+0,R1
 	POP     R17
 	RET   
+	
+;************** OUR PROJECT CUSROM FUNCTIONS *************
+
+; Storing user answer to stack
+
+; Comparing the keypad input with stored answer
+COMPARE:
+	pop temp
+
 ;************** LCD DRIVER STARTS HERE *******************
 WAIT_LCD:
 ;	ldi	r20, 1
