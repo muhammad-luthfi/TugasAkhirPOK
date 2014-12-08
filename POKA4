@@ -1,4 +1,5 @@
-.include "m16def.inc"
+.include "m8185def.inc"
+; Hanya buat ngetes, gue ganti def include nya ke m8185def.inc
 
 .def temp =r16	; Define temporary variable
 .def EW = r17	; for PORTA
